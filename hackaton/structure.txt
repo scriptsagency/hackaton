@@ -1,0 +1,27 @@
+Structura : 
+
+[CATA]1. aplicatie cordova / nativa / sau web  care acceseaza camera si trimite 1-2-3 imagini catre o aplicatie php de pe server.
+Aplicatia asteapta apoi un raspuns cu un link de pe server / o lista de produse cu review-uri 
+https://github.com/apache/cordova-app-hello-world
+https://cordova.apache.org/
+
+[George]2. install and train https://code.google.com/p/tesseract-ocr/ 
+- va tb sa poata recunoaste imagini de pe hartie 
+
+3. aplicatia server care primeste o imagine sau mai multe , apeleaza libraria ocr trimitand imaginile si asteptand un raspuns cu textul gasit 
+	3.1. aplicatia server cauta in baza de date dupa numele produsului identificat si daca gaseste inregistrari va cauta reviewuri pentru acesta . 
+		- review-urile se gasesc in baza de date (de la emag) 
+		- se cauta in tabela spiders notele de pe alte situri cu link la pagina lor de review-uri 
+	3.2. aplicatia server genereaza un json cu produsul/produsele identificate si lista de review-uri .
+- se ataseaza si produse asociate care vor aparea separat . 
+	3.3. applicatia mobila va prelua jsonul cu datele . In cazul in care nu se gaseste un rezultat se va afisa un mesaj de eroare si cateva sugestii legate de cuvintele cautate pentru o cautare mai generala
+	3.4. aplicatia mobila va afisa produsul gasit cu review-uri si un buton : add to cart in aplicatia mobila . 
+
+[AlexC]4. Shape recognition ?? 
+	- http://synaptic.juancazala.com/#/
+
+[Adx]5. Prezentare 
+
+[Adx] 6. baze date review / spiders 
+
+
