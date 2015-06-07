@@ -6,7 +6,9 @@ https://github.com/apache/cordova-app-hello-world
 https://cordova.apache.org/
 
 [George]2. install and train https://code.google.com/p/tesseract-ocr/ 
-- va tb sa poata recunoaste imagini de pe hartie 
+	- va tb sa poata recunoaste imagini de pe hartie 
+	- train script google : https://code.google.com/p/tesseract-ocr/source/browse/training/tesstrain.sh?spec=svne249d7bcb2d0ed730dd9fbffe5cd228e18a27f00&r=e249d7bcb2d0ed730dd9fbffe5cd228e18a27f00
+	- train procedure https://code.google.com/p/tesseract-ocr/wiki/TrainingTesseract3
 
 3. aplicatia server care primeste o imagine sau mai multe , apeleaza libraria ocr trimitand imaginile si asteptand un raspuns cu textul gasit 
 	3.1. aplicatia server cauta in baza de date dupa numele produsului identificat si daca gaseste inregistrari va cauta reviewuri pentru acesta . 
