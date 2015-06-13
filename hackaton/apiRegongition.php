@@ -253,6 +253,14 @@ if($page == "image_upload") {
         </head>
         <body>
             <div class="container-fluid">
+				<div class="row">
+					 <ul class="nav nav-pills">
+					  <li class="active"><a href="#">Home</a></li>
+					  <li><a href="#">Menu 1</a></li>
+					  <li><a href="#">Menu 2</a></li>
+					  <li><a href="#">Menu 3</a></li>
+					</ul>
+				</div>
                 <div class="row">
                     <div class="col-sm-9 col-md-9 col-lg-9">
                         <p>Recomandat</p>
