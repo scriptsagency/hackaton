@@ -24,7 +24,8 @@ function getImgText($fileName, $resultFile){
 	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile ));
 	
 	
-print_r($imgText);
+
+print_r($chars);
 die('xx');
 	
 	
