@@ -20,7 +20,7 @@ $string = getImgText($test_img, $resultFile);
 function getImgText($fileName, $resultFile){
 
 	//actiune teserract
-	exec('tesseract '.$test_img.' '.$resultFile);
+	exec('tesseract '.$fileName.' '.$resultFile);
 	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile ));
 	
 	
