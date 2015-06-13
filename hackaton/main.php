@@ -2,26 +2,27 @@
 
 $test_img = '.uploads/20150613_130942.jpg'
 
-$resultFile = "./result.txt";
+$resultFile = "result.txt";
 
 
 
-die('aici');
+$string = getImgText($test_img,$resultFile);
 
 
-
-$string = getImgText($test_img,$resultFile, );
-
-print_r($string);
-die('xx');
 
 function getImgText($fileName, $resultFile){
 
 
 
 	//actiune teserract
-	$imgText = exec($filePath $resultFile test);
+	$imgText = exec(tesseract.exe $filePath $resultFile test);
 	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile));
+	
+	
+	print_r($string);
+die('xx');
+	
+	
 	
 	return $chars;
 
