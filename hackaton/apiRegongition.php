@@ -33,12 +33,18 @@ class API
             die("Db connection failed, please contact admin");
         }
     }
-
+	
+	public function prepareYoutubeSearch($str)
+	{
+		return str_replace(' ','+',$str);
+	}
+	
 	//youtube crawler
-	function getYoutubeResults($searchTxt){
-
-			$result_list = array();
-			
+	function getYoutubeResults($searchTxt)
+	{
+		$searchTxt = $this->prepareYoutubeSearch($str);
+		
+		$result_list = array();	
 			//@$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
 			
 			$curl = curl_init();
