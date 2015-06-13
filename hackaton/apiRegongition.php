@@ -51,9 +51,6 @@ class API
 			
 			$page = curl_exec($curl);
 			curl_close($curl);
-			
-			var_dump($page);
-			die();
 	
 			if(isset($page)){
 
@@ -308,7 +305,7 @@ if($page == "image_upload") {
     $productData = $api->getProductData($productId);
 
 	$youtubeVid = $api->getYoutubeResults($productData['name']);
-	var_dump($youtubeVid);
+
 	
     $renderRatingScore = $api->renderStars($productId);
     $htmlPage = '<!DOCTYPE html>
