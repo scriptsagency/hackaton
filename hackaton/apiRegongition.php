@@ -109,10 +109,10 @@ if($page == "image_upload") {
     $imgUrl = "http://hackathon.fup.ro/uploads/20150613_131700.jpg";
     $api = new API;
 
+    $strResult = $api->readImage($imgUrl);
+    echo $strResult;
 
-    //$api->readImage($imgUrl);
-
-    $stop = round(microtime(true) - $start,2);
+    $stop = microtime(true) - $start;
 
     echo "took: $stop";
 }
