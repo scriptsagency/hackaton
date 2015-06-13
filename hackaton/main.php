@@ -7,13 +7,13 @@ error_reporting(-1);
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$test_img = '.uploads/20150613_130942.jpg';
+$test_img = '.uploads/poza_prel.jpg';
 
 $resultFile = "result.txt";
 
 
 
-$string = getImgText($test_img,$resultFile);
+$string = getImgText($test_img, $resultFile);
 
 
 
@@ -22,7 +22,7 @@ function getImgText($fileName, $resultFile){
 
 
 	//actiune teserract
-	$imgText = exec(tesseract.exe $filePath $resultFile test);
+	$imgText = exec(tesseract $filePath $resultFile);
 	///$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($imgText));
 	
 	
