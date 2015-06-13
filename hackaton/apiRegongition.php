@@ -170,6 +170,18 @@ class API
 
         return $r['nota'];
     }
+
+    public function renderStars($pid)
+    {
+        $rating = $this->findProductRating($pid);
+        $str = "<table><tr>";
+        for($i=0;$i<$rating;$i++)
+        {
+            $str .= "<td><img src='images/star.png'</td>";
+        }
+        $str .="</tr></table>";
+        return $str;
+    }
 }
 
 
