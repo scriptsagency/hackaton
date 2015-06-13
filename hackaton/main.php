@@ -1,6 +1,6 @@
 <?php
 
-
+echo 'zzz';
 die('xxx');
 
 
