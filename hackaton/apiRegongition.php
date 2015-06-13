@@ -36,6 +36,37 @@ class API
         }
     }
 
+	function getImgText($filePath)
+	{
+		$resultFile = 'tmp/'.md5($filePath);
+		
+		//actiune teserract
+		exec('tesseract ./uploads/'.$fileName.' '.$resultFile);
+		//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
+
+		return file_get_contents($resultFile);
+	}
+
+	function upload(){
+		$target_path = "uploads/";
+
+		$target_path = $target_path . basename($_FILES['image']['name']);
+
+		try {
+			//throw exception if can't move the file
+			if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
+				return false;
+				//throw new Exception('Could not move file');
+			}
+
+			//echo "The file " . basename($_FILES['image']['name']) ." has been uploaded";
+			//echo json_encode($_POST);
+		} catch (Exception $e) {
+			return false;
+			//die('File did not upload: ' . $e->getMessage());
+		}
+	}
+
     public function getReviews($pid)
     {
         $sql = $this->db->query("SELECT r.`text`, r.nota, r.titlu FROM reviews r WHERE r.prod_id='".$pid."' LIMIT 5");

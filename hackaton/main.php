@@ -1,38 +1,17 @@
 <?php
 
-
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-$test_img = './uploads/poza_prel.jpg';
+//$test_img = './uploads/poza_prel.jpg';
 
 $resultFile = "result";
 $resultFileFull = "result.txt";
 
-
-
-$string = getImgText($test_img, $resultFile, $resultFileFull );
-
-
-
-function getImgText($fileName, $resultFile, $resultFileFull){
-
+function getImgText($filePath){
+	$resultFile = md5($filePath);
+	
 	//actiune teserract
 	exec('tesseract '.$fileName.' '.$resultFile);
-	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
-	
-	
-
-print_r($chars);
-die('xx');
-	
-	
-	
-	return $chars;
-
+	//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
+	return file_get_contents($resultFile);
 }
 
 
@@ -57,9 +36,5 @@ function ImageToBlackAndWhite($im) {
     imagefilter($im, IMG_FILTER_NEGATE);
 
 }
-
-//imagefilter($im, IMG_FILTER_GRAYSCALE);
-//imagefilter($im, IMG_FILTER_CONTRAST, 1000);
-
 
 ?>
