@@ -55,7 +55,8 @@ class API
 			if(isset($page)){
 
 				$chars = preg_split('/id="results"/', $page, -1, PREG_SPLIT_NO_EMPTY);
-
+				var_dump($chars);
+				
 				if(count($chars) == 2 ){
 				
 					 //regex all a href
@@ -305,7 +306,7 @@ if($page == "image_upload") {
     $productData = $api->getProductData($productId);
 
 	$youtubeVid = $api->getYoutubeResults($productData['name']);
-
+	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
     $htmlPage = '<!DOCTYPE html>
