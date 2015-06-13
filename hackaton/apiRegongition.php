@@ -61,7 +61,6 @@ class API
 			if(isset($page)){
 
 				$chars = preg_split('/id="results"/', $page, -1, PREG_SPLIT_NO_EMPTY);
-				var_dump($chars);
 				
 				if(count($chars) == 2 ){
 				
@@ -78,7 +77,7 @@ class API
 										if(count($explode_img_2) > 1){
 											$url_link = explode('=',$match['2']);
 											if(count($url_link) == 2){
-												$result_list[$cont]['url'] = $url_link['1'];
+												$result_list[$cont] = $url_link['1'];
 											}
 											//$result_list[$cont]['img'] = $explode_img_2['0'];
 										}
