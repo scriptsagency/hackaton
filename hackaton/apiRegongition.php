@@ -104,12 +104,17 @@ class API
 }
 
 if($page == "image_upload") {
+    $start = microtime(true);
+
     $imgUrl = "http://hackathon.fup.ro/uploads/20150613_131700.jpg";
     $api = new API;
 
-    //$imageToken = $api->readImage($imgUrl);
-    $api->getImageSize($imgUrl);
 
+    //$api->readImage($imgUrl);
+
+    $stop = microtime(true) - $start;
+
+    echo "took: $stop";
 }
 else if($page == 'phpinfo') {
     phpinfo();
