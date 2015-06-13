@@ -36,14 +36,28 @@ class API
         }
     }
 
-    public function getResult($query)
+    public function getReviews($pid)
     {
+        $sql = $this->db->query("SELECT r.`text`, r.nota, r.titlu FROM reviews r WHERE r.prod_id='".$pid."' LIMIT 5");
         $tmp = array();
-        while($r = mysqli_fetch_array($query, MYSQLI_ASSOC) ) {
+
+        while( $r = mysqli_fetch_array($sql, MYSQLI_ASSOC)) {
+            $r['text'] = iconv('ISO-8859-15','UTF-8',$r['text']);
             $tmp[] = $r;
         }
 
         return $tmp;
+    }
+
+    /**
+     *
+    */
+    public function getProductData($pid)
+    {
+        $q = $this->db->query("select * from products p where p.id=".$pid." limit 1");
+        $r = mysqli_fetch_array($q);
+
+        return $r;
     }
 
     /**
@@ -112,36 +126,30 @@ class API
     */
     public function findProductRating($pid)
     {
-        $q = $this->db->query("SELECT p.nota AS nota from products_rating p WHERE p.id ='".$pid."' LIMIT 1");
-        // no rating found
-        if(!$q || mysqli_num_rows($q) < 1)
-            return false;
+        $q = $this->db->query("SELECT p.nota FROM products_rating p WHERE p.prod_id='".$pid."' LIMIT 1");
+//        // no rating found
+//        if(!$q || mysqli_num_rows($q) < 1)
+//            return false;
 
-        $r = mysqli_fetch_array($q);
+        $r = mysqli_fetch_array($q,MYSQLI_ASSOC);
+
         return $r['nota'];
     }
 
-    /**
-     * Find product data
-     * @param int $pid
-    */
-    public function findProductDetails($pid)
-    {
-        $nota = $this->findProductRating($pid);
-
-    }
 
     public function renderStars($pid)
     {
         $rating = $this->findProductRating($pid);
 
-        $str = "<table>";
+        $str = "<table><tr>";
         for($i=0;$i<$rating;$i++)
         {
             $str .= "<td><img src='images/star.png'</td>";
         }
 
-        $str .="</table>";
+        $str .="</tr></table>";
+
+        return $str;
     }
 //
 //    /**
@@ -263,61 +271,31 @@ if($page == "image_upload") {
 //    $stop = microtime(true) - $start;
 //
 //    echo "took: $stop";
-} else if($page == 'phpinfo') {
-    phpinfo();
-} else if($page == 'result') {
+} else if($page == 'find_product') {
+    $search = $_POST['search'];
 
-    $search = "ll Fact
-cross Pro M
+    $productId = $api->findProduct($search);
+    if(!$productId)
+        $productId = "104179";
 
-Cadm aâumvnlu
-Eclnpare Shlmano XT r 27 vheze
-Flana ludraulica disc Shlmano
+    header("LOCATION: apiRegongition.php?req=json&productId=".$productId);
 
-Furca Sunlom | Anvelo enda
-Pie! Hems' -20Â°o
-
-IâBlllâ 3.599,â
-
-2.19999";
-
-    $results = $api->findProduct($search);
-    // find most popular one, or first product choice
-    var_dump($results);
-}else if( $page == "bootstrap"){
+}else if( $page == "json") {
     $productId = $_GET['productId'];
 
+
     $productRating = $api->findProductRating($productId);
+    $productData = $api->getProductData($productId);
+    $productReview = $api->getReviews($productId);
 
-    $renderRatingScore = $api->renderStars($productId);
+    $arrJson['rating']          = $productRating;
+    $arrJson['name']            = $productData['name'];
+    $arrJson['short_desc']      = $productData['short_desc'];
+    $arrJson['image1']          = $productData['image1'];
+    $arrJson['image2']          = $productData['image2'];
+    $arrJson['part_number']     = $productData['part_number'];
+    $arrJson['part_number_key'] = $productData['part_number_key'];
+    $arrJson['review']          = $productReview;
 
-    $htmlPage = '<!DOCTYPE html>
-        <html lang="en">
-        <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>ShopAdvisor</title>
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        </head>
-        <body>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        <p>Recomandat</p>
-                        <h3>Nume produs</h3>
-                        <p>Descriere short...</p>
-                        '.$renderRatingScore.'
-                        <hr/>
-                    </div>
-                </div>
-            </div>
-        </body>
-        </html>';
-
-        echo $htmlPage;
+    echo json_encode($arrJson);
 }
