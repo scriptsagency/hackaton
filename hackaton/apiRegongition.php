@@ -79,14 +79,23 @@ class API
 
         return $imgStrResult;
     }
+
+    /**
+     * Get image size
+    */
+    public function getImageSize($imgUrl)
+    {
+        $size = getimagesize($imgUrl);
+        var_dump($size);
+    }
 }
 
 if($page == "image_upload") {
     $imgUrl = "http://hackathon.fup.ro/uploads/20150613_131700.jpg";
     $api = new API;
 
-    $imageToken = $api->readImage($imgUrl);
-
+    //$imageToken = $api->readImage($imgUrl);
+    $api->getImageSize($imgUrl);
 }
 else if($page == 'phpinfo') {
     phpinfo();
