@@ -12,6 +12,21 @@ class API
 {
     private $apiKey = "mpQHBNe011mshFIHx5sQabAcDm2yp1cjTALjsn3eFdybOd5Frv";
 
+    private $debug = true;
+
+    public function __construct()
+    {
+
+    }
+
+    /**
+    */
+    public function findProduct($str)
+    {
+        $sql = "select * from products p where p.name like '%multi%' limit 10";
+    }
+
+
     /**
      * Send image url request
      * @return string|bool       request token - needed to request
@@ -76,8 +91,12 @@ class API
     {
         $token = $this->sendImage($imgUrl);
         // request failed ?
-        if(!$token)
+        if(!$token) {
+            if(isset($this->debug))
+                echo "Token failed!".PHP_EOL;
+
             return false;
+        }
 
         // image result as string
         $imgStrResult = $this->readToken($token);
@@ -93,7 +112,12 @@ class API
     {
         $size = getimagesize($imgUrl);
         if(!isset($size[1]))
+        {
+            if(isset($this->debug))
+                echo "Image size failed!".PHP_EOL;
+
             return false;
+        }
 
         // return sizes
         return array(
