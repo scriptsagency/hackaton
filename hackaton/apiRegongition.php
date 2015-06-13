@@ -22,7 +22,7 @@ class API
     protected $dbPass;
     protected $dbName;
 
-    function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
+    function __construct($host = "188.166.4.252", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
         $this->dbUser = $dbUser;
@@ -47,6 +47,26 @@ class API
     }
 
     /**
+     * Find most common product
+    */
+    public function findAccurateIdProduct($arrResult)
+    {
+        if(count($arrResult) == 1)
+            return $arrResult[0];
+
+        $max = 0;
+        $pid = 0;
+        foreach($arrResult as $id => $count) {
+            if($max < $count) {
+                $max = $count;
+                $pid = $id;
+            }
+        }
+
+        return $id;
+    }
+
+    /**
      * Prepare search, split by each keyword
     */
     private function prepareSearch($str)
@@ -66,15 +86,63 @@ class API
         $arrSearch = $this->prepareSearch($str);
 
         foreach($arrSearch as $kw) {
-            $sql = $this->db->query("select * from products p where p.name like '%".$str."%' limit 10");
-            $resultArray = $this->getResult($sql);
+            $sql = $this->db->query("select p.id from products p where p.name like '%".$kw."%' limit 10");
 
-            $totalResults[] = $resultArray;
+            if(!$sql)
+                continue;
+
+            while($r = mysqli_fetch_array($sql, MYSQLI_ASSOC)) {
+                if(!isset( $totalResults[$r['id']]) )
+                    $totalResults[$r['id']] = 1;
+                else
+                    $totalResults[$r['id']]++;
+            }
+
         }
 
-        return $totalResults;
+        // identify most common product
+        $productId = $this->findAccurateIdProduct($totalResults);
+
+        return $productId;
     }
 
+    /**
+     * Find product rating
+     * @return int | boolean
+    */
+    public function findProductRating($pid)
+    {
+        $q = $this->db->query("SELECT p.nota AS nota from products_rating p WHERE p.id ='".$pid."' LIMIT 1");
+        // no rating found
+        if(!$q || mysqli_num_rows($q) < 1)
+            return false;
+
+        $r = mysqli_fetch_array($q);
+        return $r['nota'];
+    }
+
+    /**
+     * Find product data
+     * @param int $pid
+    */
+    public function findProductDetails($pid)
+    {
+        $nota = $this->findProductRating($pid);
+
+    }
+
+    public function renderStars($pid)
+    {
+        $rating = $this->findProductRating($pid);
+
+        $str = "<table>";
+        for($i=0;$i<$rating;$i++)
+        {
+            $str .= "<td><img src='images/star.png'</td>";
+        }
+
+        $str .="</table>";
+    }
 //
 //    /**
 //     * Send image url request
@@ -180,6 +248,9 @@ class API
 //    }
 }
 
+
+$api = new API;
+
 if($page == "image_upload") {
 //    $start = microtime(true);
 //
@@ -211,5 +282,42 @@ IâBlllâ 3.599,â
 2.19999";
 
     $results = $api->findProduct($search);
+    // find most popular one, or first product choice
     var_dump($results);
+}else if( $page == "bootstrap"){
+    $productId = $_GET['productId'];
+
+    $productRating = $api->findProductRating($productId);
+
+    $renderRatingScore = $api->renderStars($productId);
+
+    $htmlPage = '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>ShopAdvisor</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        </head>
+        <body>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <p>Recomandat</p>
+                        <h3>Nume produs</h3>
+                        <p>Descriere short...</p>
+                        '.$renderRatingScore.'
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>';
+
+        echo $htmlPage;
 }
