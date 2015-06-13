@@ -218,18 +218,20 @@ if($page == "image_upload") {
 
     echo $productId;
 
-    $productRating = $api->findProductRating($productId);
-    $productData = $api->getProductData($productId);
-    $productReview = $api->getReviews($productId);
+//    $productRating = $api->findProductRating($productId);
+//    $productData = $api->getProductData($productId);
+//    $productReview = $api->getReviews($productId);
+//
+//    $arrJson['rating']          = $productRating;
+//    $arrJson['name']            = $productData['name'];
+//    $arrJson['short_desc']      = $productData['short_desc'];
+//    $arrJson['image1']          = $productData['image1'];
+//    $arrJson['image2']          = $productData['image2'];
+//    $arrJson['part_number']     = $productData['part_number'];
+//    $arrJson['part_number_key'] = $productData['part_number_key'];
+//    $arrJson['review']          = $productReview;
 
-    $arrJson['rating']          = $productRating;
-    $arrJson['name']            = $productData['name'];
-    $arrJson['short_desc']      = $productData['short_desc'];
-    $arrJson['image1']          = $productData['image1'];
-    $arrJson['image2']          = $productData['image2'];
-    $arrJson['part_number']     = $productData['part_number'];
-    $arrJson['part_number_key'] = $productData['part_number_key'];
-    $arrJson['review']          = $productReview;
+    $arrJson['url'] = 'http://hackathon.fup.ro/apiRegongition.php?req=html_result&productId='.$productId;
 
     echo json_encode($arrJson);
 
