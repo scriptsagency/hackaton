@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 
 $test_img = './uploads/poza_prel.jpg';
 
-$resultFile = "result.txt";
+$resultFile = "result";
 
 
 
