@@ -52,7 +52,7 @@ class API
 
         if(!isset($_FILES['image']['name']))
             return false;
-        
+
         $target_path = $target_path.basename($_FILES['image']['name']);
 
         try {
@@ -220,4 +220,35 @@ if($page == "image_upload") {
     $arrJson['review']          = $productReview;
 
     echo json_encode($arrJson);
+
+}else if( $page == "bootstrap"){
+    $productId = $_GET['productId'];
+    $productRating = $api->findProductRating($productId);
+    $renderRatingScore = $api->renderStars($productId);
+    $htmlPage = '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ShopAdvisor</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        </head>
+        <body>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <p>Recomandat</p>
+                        <h3>Nume produs</h3>
+                        <p>Descriere short...</p>
+                        '.$renderRatingScore.'
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>';
+    echo $htmlPage;
 }
