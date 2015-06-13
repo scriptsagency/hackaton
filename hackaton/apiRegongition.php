@@ -249,7 +249,7 @@ class API
 			
 			$value .= '<li><iframe width="560" height="315" src="https://www.youtube.com/embed/ '. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
 		}
-		$value = '</ul>';
+		$value .= '</ul>';
 		
 		return $value;
 	}
@@ -311,7 +311,7 @@ if($page == "image_upload") {
     $productData = $api->getProductData($productId);
 
 	$youtubeVid = $api->getYoutubeResults($productData['name']);
-	var_dump($youtubeVid);
+//	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
     $htmlPage = '<!DOCTYPE html>
