@@ -1,0 +1,48 @@
+[
+    {
+        "name": "mashape/unirest-php",
+        "version": "2.6.1",
+        "version_normalized": "2.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Mashape/unirest-php.git",
+            "reference": "99c6975f2306aa1f39be06f783762364d250cd25"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/99c6975f2306aa1f39be06f783762364d250cd25",
+            "reference": "99c6975f2306aa1f39be06f783762364d250cd25",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "0.1.*",
+            "phpunit/phpunit": "~4.4"
+        },
+        "time": "2015-06-08 17:29:31",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Unirest": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Unirest PHP",
+        "homepage": "https://github.com/Mashape/unirest-php",
+        "keywords": [
+            "client",
+            "curl",
+            "http",
+            "https",
+            "rest"
+        ]
+    }
+]
