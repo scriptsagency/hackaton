@@ -10,18 +10,19 @@ ini_set('display_errors', 1);
 $test_img = './uploads/poza_prel.jpg';
 
 $resultFile = "result";
+$resultFileFull = "result.txt";
 
 
 
-$string = getImgText($test_img, $resultFile);
+$string = getImgText($test_img, $resultFile, $resultFileFull );
 
 
 
-function getImgText($fileName, $resultFile){
+function getImgText($fileName, $resultFile, $resultFileFull){
 
 	//actiune teserract
 	exec('tesseract '.$fileName.' '.$resultFile);
-	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile ));
+	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
 	
 	
 
