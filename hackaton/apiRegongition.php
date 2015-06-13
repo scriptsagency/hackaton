@@ -34,6 +34,48 @@ class API
         }
     }
 
+	//youtube crawler
+	function getYoutubeResults($searchTxt){
+
+			$result_list = array();
+			
+			$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
+
+			if(isset($page)){
+
+				$chars = preg_split('/id="results"/', $homepage, -1, PREG_SPLIT_NO_EMPTY);
+
+				if(count($chars) == 2 ){
+				
+					 //regex all a href
+					 $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
+					  if(preg_match_all("/$regexp/siU", $chars['1'], $matches, PREG_SET_ORDER)) {
+						$cont = 0;
+						foreach($matches as $match) {
+							if(strpos($match['2'], 'watch') !== false){ 
+								if(isset($match['3'])){
+									$explode_img = explode('src="',$match['3']);
+									if(count($explode_img) == 2){
+										$explode_img_2 = explode('"',$explode_img['1']);
+										if(count($explode_img_2) > 1){
+											$url_link = explode('=',$match['2']);
+											if(count($url_link) == 2){
+												$result_list[$cont]['url'] = $url_link['1'];
+											}
+											//$result_list[$cont]['img'] = $explode_img_2['0'];
+										}
+									}
+								}
+								$cont++;
+							}
+						}
+					  }
+				}	
+			}
+			
+			return $result_list;
+	}
+
     function getImgText($filePath)
 	{
 		$resultFile = 'tmp/'.md5($filePath);
