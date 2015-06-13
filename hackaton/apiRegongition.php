@@ -42,7 +42,7 @@ class API
         $tmp = array();
 
         while( $r = mysqli_fetch_array($sql, MYSQLI_ASSOC)) {
-            $r['text'] = iconv('ISO-8859-15','UTF-8',$r['text']);
+            $r['text'] = utf8_encode($r['text']);
             $tmp[] = $r;
         }
 
@@ -282,7 +282,6 @@ if($page == "image_upload") {
 
 }else if( $page == "json") {
     $productId = $_GET['productId'];
-
 
     $productRating = $api->findProductRating($productId);
     $productData = $api->getProductData($productId);
