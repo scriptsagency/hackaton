@@ -14,18 +14,23 @@ class API
 
     /**
      * Send image url request
-     * @return string       request token - needed to request
+     * @return string|bool       request token - needed to request
     */
     public function sendImage($imgUrl)
     {
+        // get image width + height
+        $size = $this->getImageSize($imgUrl);
+        if(!$size)
+            return false;
+
         // These code snippets use an open-source library. http://unirest.io/php
         $response = Unirest\Request::post("https://camfind.p.mashape.com/image_requests",
             array(
                 "X-Mashape-Key" => $this->apiKey
             ),
             array(
-                "focus[x]" => "480",
-                "focus[y]" => "640",
+                "focus[x]" => $size['x'],
+                "focus[y]" => $size['y'],
                 "image_request[altitude]" => "27.912109375",
                 "image_request[language]" => "en",
                 "image_request[latitude]" => "35.8714220766008",
@@ -82,11 +87,19 @@ class API
 
     /**
      * Get image size
+     * @return array    array( x,y )
     */
     public function getImageSize($imgUrl)
     {
         $size = getimagesize($imgUrl);
-        var_dump($size);
+        if(!isset($size[1]))
+            return false;
+
+        // return sizes
+        return array(
+            'x'    =>  $size[0],
+            'y'    =>  $size[1]
+        );
     }
 }
 
@@ -96,6 +109,7 @@ if($page == "image_upload") {
 
     //$imageToken = $api->readImage($imgUrl);
     $api->getImageSize($imgUrl);
+
 }
 else if($page == 'phpinfo') {
     phpinfo();
