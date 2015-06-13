@@ -50,7 +50,10 @@ class API
     function upload(){
         $target_path = "uploads/";
 
-        $target_path = $target_path . basename($_FILES['image']['name']);
+        if(!isset($_FILES['image']['name']))
+            return false;
+        
+        $target_path = $target_path.basename($_FILES['image']['name']);
 
         try {
             //throw exception if can't move the file
