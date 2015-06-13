@@ -77,7 +77,7 @@ class API
 										if(count($explode_img_2) > 1){
 											$url_link = explode('=',$match['2']);
 											if(count($url_link) == 2){
-												$result_list[$cont] = $url_link['1'];
+												$result_list[] = $url_link['1'];
 											}
 											//$result_list[$cont]['img'] = $explode_img_2['0'];
 										}
