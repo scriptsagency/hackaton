@@ -235,7 +235,10 @@ if($page == "image_upload") {
 
 }else if( $page == "html_result"){
     $productId = $_GET['productId'];
+
     $productRating = $api->findProductRating($productId);
+    $productData = $api->getProductData($productId);
+
     $renderRatingScore = $api->renderStars($productId);
     $htmlPage = '<!DOCTYPE html>
         <html lang="en">
@@ -253,11 +256,18 @@ if($page == "image_upload") {
                 <div class="row">
                     <div class="col-sm-9 col-md-9 col-lg-9">
                         <p>Recomandat</p>
-                        <h3>Nume produs</h3>
-                        <p>Descriere short...</p>
+                        <h3>'.$productData['name'].'</h3>
+                        <p>'.$productData['short_desc'].'</p>
                         '.$renderRatingScore.'
                         <hr/>
                     </div>
+                </div>
+                <div class="row">
+                    <h3>Product video reviews</h3>
+                    <ul>
+                        <li>Image 1 - yt img preview</li>
+                        <li>Image 2 - yt img preview 2</li>
+                    </ul>
                 </div>
             </div>
         </body>
