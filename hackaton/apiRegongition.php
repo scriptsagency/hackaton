@@ -22,7 +22,7 @@ class API
     protected $dbPass;
     protected $dbName;
 
-    function __construct($host = "188.166.4.252", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
+    function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
         $this->dbUser = $dbUser;
