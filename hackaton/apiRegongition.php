@@ -43,7 +43,7 @@ class API
 
 			if(isset($page)){
 
-				$chars = preg_split('/id="results"/', $homepage, -1, PREG_SPLIT_NO_EMPTY);
+				$chars = preg_split('/id="results"/', $page, -1, PREG_SPLIT_NO_EMPTY);
 
 				if(count($chars) == 2 ){
 				
