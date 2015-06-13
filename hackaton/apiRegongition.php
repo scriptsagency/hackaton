@@ -221,7 +221,7 @@ if($page == "image_upload") {
 
     echo json_encode($arrJson);
 
-}else if( $page == "bootstrap"){
+}else if( $page == "html_result"){
     $productId = $_GET['productId'];
     $productRating = $api->findProductRating($productId);
     $renderRatingScore = $api->renderStars($productId);
