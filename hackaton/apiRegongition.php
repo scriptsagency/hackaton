@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 
 require_once 'vendor/autoload.php';
 
-$page = ''
+$page = '';
 if(isset($_GET['req']))
     $page = $_GET['req'];
 
@@ -275,13 +275,18 @@ if($page == "image_upload") {
     $search = $_POST['search'];
 
     $productId = $api->findProduct($search);
-    if(!$productId)
+    if (!$productId)
         $productId = "104179";
 
-    header("LOCATION: apiRegongition.php?req=json&productId=".$productId);
+    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
 
+}else if($page == "test"){
+    phpinfo();
+    
 }else if( $page == "json") {
     $productId = $_GET['productId'];
+
+    echo $productId;
 
     $productRating = $api->findProductRating($productId);
     $productData = $api->getProductData($productId);
