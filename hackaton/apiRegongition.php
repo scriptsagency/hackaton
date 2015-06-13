@@ -263,11 +263,13 @@ if($page == "image_upload") {
                     </div>
                 </div>
                 <div class="row">
-                    <h3>Product video reviews</h3>
-                    <ul>
-                        <li>Image 1 - yt img preview</li>
-                        <li>Image 2 - yt img preview 2</li>
-                    </ul>
+					<div class="col-sm-9 col-md-9 col-lg-9">
+						<h3>Product video reviews</h3>
+						<ul>
+							<li>Image 1 - yt img preview</li>
+							<li>Image 2 - yt img preview 2</li>
+						</ul>
+					</div>
                 </div>
             </div>
         </body>
