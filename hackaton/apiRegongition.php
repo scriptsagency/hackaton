@@ -216,8 +216,6 @@ if($page == "image_upload") {
 }else if( $page == "json") {
     $productId = $_GET['productId'];
 
-    echo $productId;
-
 //    $productRating = $api->findProductRating($productId);
 //    $productData = $api->getProductData($productId);
 //    $productReview = $api->getReviews($productId);
@@ -231,9 +229,9 @@ if($page == "image_upload") {
 //    $arrJson['part_number_key'] = $productData['part_number_key'];
 //    $arrJson['review']          = $productReview;
 
-    $arrJson['url'] = 'http://hackathon.fup.ro/apiRegongition.php?req=html_result&productId='.$productId;
+    echo 'http://hackathon.fup.ro/apiRegongition.php?req=html_result&productId='.$productId;
 
-    echo json_encode($arrJson);
+//    echo json_encode($arrJson);
 
 }else if( $page == "html_result"){
     $productId = $_GET['productId'];
