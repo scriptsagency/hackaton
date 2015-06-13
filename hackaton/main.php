@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 
 $test_img = './uploads/poza_prel.jpg';
 
-$resultFile = "result.txt.txt";
+$resultFile = "result.txt";
 
 
 
@@ -20,7 +20,7 @@ $string = getImgText($test_img, $resultFile);
 function getImgText($fileName, $resultFile){
 
 	//actiune teserract
-	exec('tesseract '.$filePath.' '.$resultFile);
+	exec('tesseract '.$test_img.' '.$resultFile);
 	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile ));
 	
 	
