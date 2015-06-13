@@ -7,9 +7,9 @@ error_reporting(-1);
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$test_img = '.uploads/poza_prel.jpg';
+$test_img = './uploads/poza_prel.jpg';
 
-$resultFile = "result.txt";
+$resultFile = "result.txt.txt";
 
 
 
@@ -19,11 +19,9 @@ $string = getImgText($test_img, $resultFile);
 
 function getImgText($fileName, $resultFile){
 
-
-
 	//actiune teserract
-	$imgText = exec(tesseract $filePath $resultFile);
-	///$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($imgText));
+	exec('tesseract '.$filePath.' '.$resultFile);
+	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile ));
 	
 	
 print_r($imgText);
