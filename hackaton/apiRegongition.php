@@ -112,7 +112,7 @@ if($page == "image_upload") {
 
     //$api->readImage($imgUrl);
 
-    $stop = microtime(true) - $start;
+    $stop = rount(microtime(true) - $start,2);
 
     echo "took: $stop";
 }
