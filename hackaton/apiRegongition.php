@@ -224,6 +224,17 @@ class API
         $str .="</tr></table>";
         return $str;
     }
+	
+	public function renderYoutube($arr)
+	{
+		$value = '<ul>';
+		for($i = 1; $i <= 3; $i++) {
+			$value .= '<li><iframe width="560" height="315" src="https://www.youtube.com/embed/ '. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
+		}
+		$value = '</ul>';
+		
+		return $value;
+	}
 }
 
 
@@ -281,6 +292,8 @@ if($page == "image_upload") {
     $productRating = $api->findProductRating($productId);
     $productData = $api->getProductData($productId);
 
+	$youtubeVid = $api->getYoutubeResults($productData['name']);
+	
     $renderRatingScore = $api->renderStars($productId);
     $htmlPage = '<!DOCTYPE html>
         <html lang="en">
@@ -315,10 +328,7 @@ if($page == "image_upload") {
                 <div class="row">
 					<div class="col-sm-9 col-md-9 col-lg-9">
 						<h3>Product video reviews</h3>
-						<ul>
-							<li>Image 1 - yt img preview</li>
-							<li>Image 2 - yt img preview 2</li>
-						</ul>
+						'. $api->renderYoutube($youtubeVid) .'
 					</div>
                 </div>
             </div>
