@@ -39,7 +39,7 @@ class API
 
 			$result_list = array();
 			
-			$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
+			@$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
 
 			if(isset($page)){
 
