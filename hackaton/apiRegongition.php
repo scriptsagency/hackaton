@@ -22,7 +22,7 @@ class API
     protected $dbPass;
     protected $dbName;
 
-    function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
+    function __construct($host = "188.166.4.252", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
         $this->dbUser = $dbUser;
@@ -294,7 +294,7 @@ if($page == "image_upload") {
     $arrJson['image2']          = $productData['image2'];
     $arrJson['part_number']     = $productData['part_number'];
     $arrJson['part_number_key'] = $productData['part_number_key'];
-    $arrJson['review']          = $productReview;
+    //$arrJson['review']          = $productReview;
 
     echo json_encode($arrJson);
 }
