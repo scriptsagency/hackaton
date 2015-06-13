@@ -15,11 +15,11 @@ function getImgText($fileName, $resultFile){
 
 
 	//actiune teserract
-	$imgText = exec(tesseract.exe $filePath $resultFile test);
-	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile));
+	//$imgText = exec(tesseract.exe $filePath $resultFile test);
+	//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile));
 	
 	
-	print_r($string);
+print_r($string);
 die('xx');
 	
 	
