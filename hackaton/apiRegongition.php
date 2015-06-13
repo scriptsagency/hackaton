@@ -10,8 +10,6 @@ if(isset($_GET['req']))
 
 class API
 {
-    private $apiKey = "mpQHBNe011mshFIHx5sQabAcDm2yp1cjTALjsn3eFdybOd5Frv";
-
     private $debug = true;
 
     /** @var db settings */
@@ -36,28 +34,31 @@ class API
         }
     }
 
-	function getImgText($filePath)
+    function getImgText($filePath)
 	{
 		$resultFile = 'tmp/'.md5($filePath);
 		
 		//actiune teserract
-		exec('tesseract ./uploads/'.$fileName.' '.$resultFile);
+		exec('tesseract ./uploads/'.$filePath.' '.$resultFile);
 		//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
 
 		return file_get_contents($resultFile);
 	}
+    /**
+     * Returns file path as string
+    */
+    function upload(){
+        $target_path = "uploads/";
 
-	function upload(){
-		$target_path = "uploads/";
+        $target_path = $target_path . basename($_FILES['image']['name']);
 
-		$target_path = $target_path . basename($_FILES['image']['name']);
-
-		try {
-			//throw exception if can't move the file
-			if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
-				return false;
+        try {
+            //throw exception if can't move the file
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
+                return false;
 				//throw new Exception('Could not move file');
 			}
+            return $target_path;
 
 			//echo "The file " . basename($_FILES['image']['name']) ." has been uploaded";
 			//echo json_encode($_POST);
@@ -166,142 +167,25 @@ class API
 
         return $r['nota'];
     }
-
-
-    public function renderStars($pid)
-    {
-        $rating = $this->findProductRating($pid);
-
-        $str = "<table><tr>";
-        for($i=0;$i<$rating;$i++)
-        {
-            $str .= "<td><img src='images/star.png'</td>";
-        }
-
-        $str .="</tr></table>";
-
-        return $str;
-    }
-//
-//    /**
-//     * Send image url request
-//     * @return string|bool       request token - needed to request
-//    */
-//    public function sendImage($imgUrl)
-//    {
-//        // get image width + height
-//        $size = $this->getImageSize($imgUrl);
-//        if(!$size)
-//            return false;
-//
-//        // These code snippets use an open-source library. http://unirest.io/php
-//        $response = Unirest\Request::post("https://camfind.p.mashape.com/image_requests",
-//            array(
-//                "X-Mashape-Key" => $this->apiKey
-//            ),
-//            array(
-//                "focus[x]" => $size['x'],
-//                "focus[y]" => $size['y'],
-//                "image_request[altitude]" => "27.912109375",
-//                "image_request[language]" => "en",
-//                "image_request[latitude]" => "35.8714220766008",
-//                "image_request[locale]" => "en_US",
-//                "image_request[longitude]" => "14.3583203002251",
-//                "image_request[remote_image_url]" => $imgUrl
-//            )
-//        );
-//
-//        $jsonResponse = json_decode($response);
-//
-//        if(!$jsonResponse || !isset($jsonResponse['token']))
-//            return false;
-//
-//        return $jsonResponse['token'];
-//
-//    }
-//
-//    /**
-//     * Read image string from token
-//     * @return string | boolean     Boolean when blurry or wasn't able to read image
-//    */
-//    public function readToken($token)
-//    {
-//        $response = Unirest\Request::get("https://camfind.p.mashape.com/image_responses/".$token,
-//            array(
-//                "X-Mashape-Key" => $this->apiKey,
-//                "Accept" => "application/json"
-//            )
-//        );
-//
-//        $jsonRequest = json_decode($response);
-//        if(!$jsonRequest || isset($jsonRequest['reason'])) {
-//            if($this->debug)
-//                var_dump($jsonRequest);
-//
-//            return false;
-//        }
-//
-//        return $jsonRequest['name'];
-//    }
-//
-//    /**
-//     * Read text from the image
-//    */
-//    public function readImage($imgUrl)
-//    {
-//        $token = $this->sendImage($imgUrl);
-//        // request failed ?
-//        if(!$token) {
-//            if(isset($this->debug))
-//                echo "Token failed!".PHP_EOL;
-//
-//            return false;
-//        }
-//
-//        // image result as string
-//        $imgStrResult = $this->readToken($token);
-//
-//        return $imgStrResult;
-//    }
-//
-//    /**
-//     * Get image size
-//     * @return array    array( x,y )
-//    */
-//    public function getImageSize($imgUrl)
-//    {
-//        $size = getimagesize($imgUrl);
-//        if(!isset($size[1]))
-//        {
-//            if(isset($this->debug))
-//                echo "Image size failed!".PHP_EOL;
-//
-//            return false;
-//        }
-//
-//        // return sizes
-//        return array(
-//            'x'    =>  $size[0],
-//            'y'    =>  $size[1]
-//        );
-//    }
 }
 
 
 $api = new API;
 
 if($page == "image_upload") {
-//    $start = microtime(true);
-//
-//    $imgUrl = "http://hackathon.fup.ro/uploads/20150613_131700.jpg";
-//    $api = new API;
-//
-//    $strResult = $api->readImage($imgUrl);
-//    echo $strResult;
-//
-//    $stop = microtime(true) - $start;
-//
-//    echo "took: $stop";
+    // get file path
+    $filePath = $api->upload();
+
+    // get image text from ocr
+    $strText = $api->getImgText($filePath);
+
+    // recognize product id
+    $productId = $api->findProduct($search);
+    if (!$productId)
+        $productId = "104179";
+
+    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
+
 } else if($page == 'find_product') {
     $search = $_POST['search'];
 
@@ -311,9 +195,9 @@ if($page == "image_upload") {
 
     header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
 
-}else if($page == "test"){
+}else if($page == "test") {
     phpinfo();
-    
+
 }else if( $page == "json") {
     $productId = $_GET['productId'];
 
