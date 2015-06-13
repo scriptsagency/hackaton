@@ -4,7 +4,7 @@ echo 'zzz';
 die('xxx');
 
 
-
+/*
 $test_img = '.uploads/20150613_130942.jpg'
 
 $resultFile = "./result.txt";
@@ -53,5 +53,5 @@ function ImageToBlackAndWhite($im) {
 //imagefilter($im, IMG_FILTER_GRAYSCALE);
 //imagefilter($im, IMG_FILTER_CONTRAST, 1000);
 
-
+*/
 ?>
