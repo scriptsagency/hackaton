@@ -40,6 +40,8 @@ class API
 			$result_list = array();
 			
 			@$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
+			
+			var_dump($page);
 
 			if(isset($page)){
 
