@@ -216,8 +216,6 @@ if($page == "image_upload") {
 }else if( $page == "json") {
     $productId = $_GET['productId'];
 
-    echo $productId;
-
 //    $productRating = $api->findProductRating($productId);
 //    $productData = $api->getProductData($productId);
 //    $productReview = $api->getReviews($productId);
