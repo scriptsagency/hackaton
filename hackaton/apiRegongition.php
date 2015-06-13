@@ -14,16 +14,46 @@ class API
 
     private $debug = true;
 
-    public function __construct()
-    {
+    /** @var db settings */
+    protected $db;
 
+    protected $dbHost;
+    protected $dbUser;
+    protected $dbPass;
+    protected $dbName;
+
+    function __construct($host = "188.166.4.252", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
+    {
+        $this->dbHost = $host;
+        $this->dbUser = $dbUser;
+        $this->dbPass = $dbPass;
+        $this->dbName = $dbName;
+
+        $this->db = new mysqli($host, $dbUser, $dbPass, $dbName);
+        if($this->db->connect_error)
+        {
+            die("Db connection failed, please contact admin");
+        }
     }
 
+    public function getResult($query)
+    {
+        $tmp = array();
+        while($r = mysqli_fetch_array($query, MYSQLI_ASSOC) ) {
+            $tmp[] = $r;
+        }
+
+        return $tmp;
+    }
     /**
+     * Find product by str
     */
     public function findProduct($str)
     {
-        $sql = "select * from products p where p.name like '%multi%' limit 10";
+        $sql = $this->db->query("select * from products p where p.name like '%".$str."%' limit 10");
+        $resultArray = $this->getResult($sql);
+        
+        var_dump($resultArray);
     }
 
 
@@ -142,4 +172,6 @@ if($page == "image_upload") {
 }
 else if($page == 'phpinfo') {
     phpinfo();
+}else if($page == 'result') {
+
 }
