@@ -42,7 +42,7 @@ class API
 	//youtube crawler
 	function getYoutubeResults($searchTxt)
 	{
-		$searchTxt = $this->prepareYoutubeSearch($str);
+		$searchTxt = $this->prepareYoutubeSearch($searchTxt);
 		
 		$result_list = array();	
 			//@$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
