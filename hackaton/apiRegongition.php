@@ -39,10 +39,22 @@ class API
 
 			$result_list = array();
 			
-			@$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
+			//@$page = file_get_contents('https://www.youtube.com/results?search_query='.$searchTxt);
+			
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_URL => 'https://www.youtube.com/results?search_query='.$searchTxt,
+				CURLOPT_SSL_VERIFYPEER, false,
+				CURLOPT_FOLLOWLOCATION => true,
+			));
+			
+			$page = curl_exec($curl);
+			curl_close($curl);
 			
 			var_dump($page);
-
+			die();
+	
 			if(isset($page)){
 
 				$chars = preg_split('/id="results"/', $page, -1, PREG_SPLIT_NO_EMPTY);
@@ -230,7 +242,6 @@ class API
 	public function renderYoutube($arr)
 	{
 		$value = '<ul>';
-		var_dump($arr);
 		for($i = 1; $i <= 3; $i++) {
 			
 			$value .= '<li><iframe width="560" height="315" src="https://www.youtube.com/embed/ '. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
