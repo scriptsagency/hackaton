@@ -246,8 +246,7 @@ class API
 	{
 		$value = '<ul>';
 		for($i = 1; $i <= 3; $i++) {
-			
-			$value .= '<li><iframe width="560" height="315" src="https://www.youtube.com/embed/ '. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
+			$value .= '<li><iframe class="ytd" width="560" height="315" src="https://www.youtube.com/embed/'. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
 		}
 		$value .= '</ul>';
 		
@@ -324,7 +323,13 @@ if($page == "image_upload") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        </head>
+        <style>
+		ul{padding:0;list-style-type: none;}
+		li{padding:0;}
+		.ytd{max-height:560px;max-height:315px;}
+		</style>
+		
+		</head>
         <body>
             <div class="container-fluid">
 				<div class="row">
