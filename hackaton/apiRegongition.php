@@ -228,7 +228,9 @@ class API
 	public function renderYoutube($arr)
 	{
 		$value = '<ul>';
+		var_dump($arr);
 		for($i = 1; $i <= 3; $i++) {
+			
 			$value .= '<li><iframe width="560" height="315" src="https://www.youtube.com/embed/ '. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
 		}
 		$value = '</ul>';
@@ -293,6 +295,7 @@ if($page == "image_upload") {
     $productData = $api->getProductData($productId);
 
 	$youtubeVid = $api->getYoutubeResults($productData['name']);
+	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
     $htmlPage = '<!DOCTYPE html>
