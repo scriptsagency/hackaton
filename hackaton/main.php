@@ -4,7 +4,8 @@
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $test_img = '.uploads/20150613_130942.jpg';
 
@@ -22,10 +23,10 @@ function getImgText($fileName, $resultFile){
 
 	//actiune teserract
 	$imgText = exec(tesseract.exe $filePath $resultFile test);
-	$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFile));
+	///$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($imgText));
 	
 	
-print_r($chars);
+print_r($imgText);
 die('xx');
 	
 	
