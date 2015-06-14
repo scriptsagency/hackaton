@@ -404,8 +404,7 @@ if($page == "image_upload") {
 										<div class="col-md-6">';
 						foreach($array_reviews as $review){
 						$html_reviews .= '<div class="alert alert-warning">
-												" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-												Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+												" '.$review['text'].'"
 											   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
 										</div>';
 						
@@ -419,6 +418,7 @@ if($page == "image_upload") {
 				
 			$text_2 = '</div>
                 </div>
+				
                 <div class="row" id="specialized">
                     <div class="col-sm-9 col-md-9 col-lg-9">
                     '.$img.'
