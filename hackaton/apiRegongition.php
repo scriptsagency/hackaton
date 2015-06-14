@@ -244,11 +244,13 @@ class API
 	
 	public function renderYoutube($arr)
 	{
-		$value = '<ul>';
+		$value = '<div class="row">';
 		for($i = 1; $i <= 3; $i++) {
-			$value .= '<li><iframe class="ytd" width="560" height="300" src="https://www.youtube.com/embed/'. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
+			$value .= '<div class="embed-responsive embed-responsive-16by9">
+                <iframe class="ytd embed-responsive-item" src="https://www.youtube.com/embed/'. $arr[$i] .'" frameborder="0" allowfullscreen></iframe>
+                </div>';
 		}
-		$value .= '</ul>';
+		$value .= '</div>';
 		
 		return $value;
 	}
@@ -323,51 +325,11 @@ if($page == "image_upload") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script>';
-		
-	$htmlPage .= "
-			$(function() {
-				// Find all YouTube videos
-				var $allVideos = $(\"iframe[src^=http://www.youtube.com']\"),
-				// The element that is fluid width
-				$fluidEl = $('body');
 
-				// Figure out and save aspect ratio for each video
-				$allVideos.each(function() {
-
-				$(this)
-					.data('aspectRatio', this.height / this.width)
-					// and remove the hard coded width/height
-					.removeAttr('height')
-					.removeAttr('width');
-				});
-
-				// When the window is resized
-				// (You'll probably want to debounce this)
-				$(window).resize(function() {
-
-					var newWidth = $fluidEl.width();
-					// Resize all videos according to their own aspect ratio
-					$allVideos.each(function() {
-
-						var $el = $(this);
-						$el
-							.width(newWidth)
-							.height(newWidth * $el.data('aspectRatio'));
-					});
-
-				// Kick off one resize to fix all videos on page load
-				}).resize();
-
-			});
-		
-		</script>";
-		
-	$htmlPage .= '
         <style>
 		ul{padding:0;list-style-type: none;}
 		li{padding:0;}
-		.ytd{max-height:560px;max-height:300px;}
+        /**.ytd{max-height:560px;max-height:300px;}**/
 		</style>
 		
 		</head>
