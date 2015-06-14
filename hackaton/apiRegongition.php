@@ -197,6 +197,7 @@ class API
         $totalResults = array();
 
         $arrSearch = $this->prepareSearch($str);
+        var_dump($arrSearch);
 
         foreach($arrSearch as $kw) {
             $sql = $this->db->query("select p.id from products p where p.name like '%".$kw."%' limit 10");
@@ -275,7 +276,7 @@ if($page == "image_upload") {
     // recognize product id
     $productId = $api->findProduct($search);
     var_dump($productId);
-    
+
     if (!$productId)
         $productId = "104179";
 
