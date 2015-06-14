@@ -276,7 +276,7 @@ if($page == "image_upload") {
     if (!$productId)
         $productId = "104179";
 
-    //header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
+    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
 
 } else if($page == 'find_product') {
     $search = $_POST['search'];
