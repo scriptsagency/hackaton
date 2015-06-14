@@ -98,7 +98,7 @@ class API
 		$resultFile = 'tmp/'.md5($filePath);
 
 		//actiune teserract
-		exec('tesseract '.$filePath.' '.$resultFile);
+		exec('tesseract '.$filePath.' '.$resultFile.' george');
 		//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
 
 		return file_get_contents($resultFile.".txt");
