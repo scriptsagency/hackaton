@@ -274,6 +274,8 @@ if($page == "image_upload") {
 
     // recognize product id
     $productId = $api->findProduct($search);
+    var_dump($productId);
+    
     if (!$productId)
         $productId = "104179";
 
