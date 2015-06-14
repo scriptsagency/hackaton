@@ -325,27 +325,127 @@ if($page == "image_upload") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+		<script>
+			$("#menu a").click(function(e) {
+			  $("#menu").collapse("hide");
+			  changeContent(e.target.innerText);
+			});
+		</script>
         <style>
-		ul{padding:0;list-style-type: none;}
-		li{padding:0;}
-        /**.ytd{max-height:560px;max-height:300px;}**/
+			ul{padding:0;list-style-type: none;}
+			li{padding:0;}
+			.embed-responsive-16by9{padding-bottom: 20px}
+			/**.ytd{max-height:560px;max-height:300px;}**/
+			.navbar .navbar-inner {
+			  border-radius: 0;
+			  padding-left: 5px;
+			}
+			
+			.menu {
+			  height:100%;
+			  /* background-color: #3D6AA2; */
+
+			  &.collapse {
+				float:left;
+				height: 100% !important;
+				width: auto;
+			  }
+		  
+			  &.collapse.height {
+				position: relative;
+				height: 0;
+				overflow: hidden;
+				-webkit-transition: height 0.35s ease;
+				-moz-transition: height 0.35s ease;
+				-o-transition: height 0.35s ease;
+				transition: height 0.35s ease;
+			  }
+		  
+			  &.collapse.width {
+				position: relative;
+				width: 0;
+				overflow: hidden;
+				-webkit-transition: width 0.35s ease;
+				-moz-transition: width 0.35s ease;
+				-o-transition: width 0.35s ease;
+				transition: width 0.35s ease;
+			  }
+			  
+			  &.collapse.in.width {
+				width: auto;
+			  }
+			  
+			  &.collapse.in.height {
+				height: auto;
+			  }
+			
+			  .collapse-inner {
+				position: relative;        
+				width: 250px;
+				height: 100%;
+			  }
+			  
+			  .navbar .navbar-inner {
+				text-align: center;
+				color: grey;
+				font-size: 1.2em;
+				line-height: 38px;
+			  }
+			  
+			  .nav-stacked {
+				padding: 0 10px;
+			  }
+				
+			}
+			.view {
+			  width: 50%;
+			  height: 100%;
+			  overflow: hidden;
+			  
+			  .navbar .navbar-inner .btn-navbar {
+				display: block;
+				float: left;
+			  }
 		</style>
 		
 		</head>
         <body>
             <div class="container-fluid">
-				<div class="row">
+				<!--<div class="row">
 					 <ul class="nav nav-pills">
 					  <li class="active"><a href="#">Product description</a></li>
 					  <li><a href="#">Youtube</a></li>
 					  <li><a href="#">Specialized Reviews</a></li>
 					  <li><a href="#">Clients Reviews</a></li>
 					</ul>
+				</div>-->
+				<div id="menu" class="menu nav-collapse collapse width">
+					<div class="collapse-inner">
+					  <div class="navbar navbar-inverse">
+						<div class="navbar-inner">
+						  Menu
+						</div>
+					  </div>
+					  <ul class="nav nav-tabs nav-stacked">
+						<li><a>Futurama</a></li>
+						<li><a>Star Wars</a></li>
+						<li><a>Doctor Who</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div class="view">
+					<div class="navbar navbar-inverse">
+						<div class="navbar-inner">
+							<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#menu">
+							  <span class="icon-bar"></span>
+							  <span class="icon-bar"></span>
+							  <span class="icon-bar"></span>
+							</button>
+						</div>
+					</div>
 				</div>
                 <div class="row">
                     <div class="col-sm-9 col-md-9 col-lg-9">
-                        <p>Recomandat</p>
                         <h3>'.$productData['name'].'</h3>
                         <p>'.$productData['short_desc'].'</p>
                         '.$renderRatingScore.'
