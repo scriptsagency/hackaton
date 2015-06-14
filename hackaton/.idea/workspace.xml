@@ -25,14 +25,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="apiRegongition.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="apiRegongition.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apiRegongition.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37853774" vertical-offset="2042" max-vertical-offset="6358">
-              <caret line="170" column="13" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="13" />
+            <state vertical-scroll-proportion="-8.290909" vertical-offset="1278" max-vertical-offset="6732">
+              <caret line="111" column="32" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="32" />
               <folding>
                 <element signature="n#getImgText#0;n#API#0;n#!!top" expanded="false" />
-                <element signature="n#upload#0;n#API#0;n#!!top" expanded="false" />
                 <marker date="1434244261789" expanded="true" signature="3461:3543" placeholder="SELECT r.`te..." />
                 <marker date="1434244261789" expanded="true" signature="3838:3890" placeholder="select * fro..products..." />
                 <marker date="1434244261789" expanded="true" signature="3899:3951" placeholder="select * fro..products..." />
@@ -69,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="204">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.096921325" vertical-offset="0" max-vertical-offset="877">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -269,7 +268,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#getImgText#0;n#API#0;n#!!top" expanded="false" />
-            <element signature="n#upload#0;n#API#0;n#!!top" expanded="false" />
             <marker date="1434244261789" expanded="true" signature="3461:3543" placeholder="SELECT r.`te..." />
             <marker date="1434244261789" expanded="true" signature="3838:3890" placeholder="select * fro..products..." />
             <marker date="1434244261789" expanded="true" signature="3899:3951" placeholder="select * fro..products..." />
@@ -334,21 +332,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="204">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apiRegongition.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37853774" vertical-offset="2042" max-vertical-offset="6358">
-          <caret line="170" column="13" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="13" />
+        <state vertical-scroll-proportion="-8.290909" vertical-offset="1278" max-vertical-offset="6732">
+          <caret line="111" column="32" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="32" />
           <folding>
             <element signature="n#getImgText#0;n#API#0;n#!!top" expanded="false" />
-            <element signature="n#upload#0;n#API#0;n#!!top" expanded="false" />
             <marker date="1434244261789" expanded="true" signature="3461:3543" placeholder="SELECT r.`te..." />
             <marker date="1434244261789" expanded="true" signature="3838:3890" placeholder="select * fro..products..." />
             <marker date="1434244261789" expanded="true" signature="3899:3951" placeholder="select * fro..products..." />
@@ -381,6 +370,14 @@
             <marker date="1434244261789" expanded="true" signature="11382:11406" placeholder="..." />
             <marker date="1434244261789" expanded="true" signature="11382:11387" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.096921325" vertical-offset="0" max-vertical-offset="877">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
