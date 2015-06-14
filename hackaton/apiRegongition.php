@@ -163,7 +163,7 @@ class API
             return $arrResult[0];
 
         $max = 0;
-        $pid = 0;
+        $pid = 104179;
         foreach($arrResult as $id => $count) {
             if($max < $count) {
                 $max = $count;
@@ -171,7 +171,7 @@ class API
             }
         }
 
-        return $id;
+        return $pid;
     }
 
     /**
