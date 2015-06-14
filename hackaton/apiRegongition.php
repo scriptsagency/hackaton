@@ -181,7 +181,12 @@ class API
     {
         $arrKw = explode(" ",$str);
 
-        return $arrKw;
+        $resultsArray = array();
+        foreach($arrKw as $kw) {
+            if(strlen($kw) >= 3)
+                $resultsArray[] = $kw;
+        }
+        return $resultsArray;
     }
 
     /**
