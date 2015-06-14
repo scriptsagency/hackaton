@@ -246,7 +246,7 @@ class API
 	{
 		$value = '<ul>';
 		for($i = 1; $i <= 3; $i++) {
-			$value .= '<li><iframe class="ytd" width="560" height="315" src="https://www.youtube.com/embed/'. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
+			$value .= '<li><iframe class="ytd" width="560" height="300" src="https://www.youtube.com/embed/'. $arr[$i] .'" frameborder="0" allowfullscreen></iframe></li>';
 		}
 		$value .= '</ul>';
 		
@@ -323,12 +323,14 @@ if($page == "image_upload") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script>
+		<script>';
+		
+	$htmlPage .= "
 			$(function() {
 				// Find all YouTube videos
-				var $allVideos = $("iframe[src^='http://www.youtube.com']"),
+				var $allVideos = $(\"iframe[src^=http://www.youtube.com']\"),
 				// The element that is fluid width
-				$fluidEl = $("body");
+				$fluidEl = $('body');
 
 				// Figure out and save aspect ratio for each video
 				$allVideos.each(function() {
@@ -359,12 +361,13 @@ if($page == "image_upload") {
 
 			});
 		
-		</script>
+		</script>";
 		
+	$htmlPage .= '
         <style>
 		ul{padding:0;list-style-type: none;}
 		li{padding:0;}
-		.ytd{max-height:560px;max-height:315px;}
+		.ytd{max-height:560px;max-height:300px;}
 		</style>
 		
 		</head>
