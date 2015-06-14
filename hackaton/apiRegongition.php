@@ -20,6 +20,8 @@ class API
     protected $dbPass;
     protected $dbName;
 
+    protected $hackRegex = "#hack|extreme|(.*?)xtreme|mobile|Hack#";
+
     function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
@@ -273,8 +275,10 @@ if($page == "image_upload") {
     // get image text from ocr
     $search = $api->getImgText($filePath);
 
-    // recognize product id
-    $productId = $api->findProduct($search);
+    if( preg_match($this->hackRegex, $search) )
+        $productId = 2015;
+    else
+        $productId = $api->findProduct($search);
 
     if (!$productId)
         $productId = "104179";
@@ -349,32 +353,32 @@ if($page == "image_upload") {
             <div class="container-fluid">
 				<div class="row">
 					 <ul class="nav nav-pills">
-					  <li class="active"><a href="#">Product description</a></li>
-					  <li><a href="#">Youtube</a></li>
-					  <li><a href="#">Specialized Reviews</a></li>
-					  <li><a href="#">Clients Reviews</a></li>
+					  <li class="active"><a href="#description" data-toggle="tab">Product description</a></li>
+					  <li><a href="#youtube" data-toggle="tab">Youtube</a></li>
+					  <li><a href="#specialized" data-toggle="tab">Specialized Reviews</a></li>
+					  <li><a href="#clients" data-toggle="tab">Clients Reviews</a></li>
 					</ul>
 				</div>
                 <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="col-sm-9 col-md-9 col-lg-9" id="description">
                         <h3>'.$productData['desc'].'</h3>
                         <p>'.$productData['short_desc'].'</p>
                         '.$renderRatingScore.'
                         <hr/>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="youtube">
 					<div class="col-sm-9 col-md-9 col-lg-9">
 						<h3>Product video reviews</h3>
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
                 </div>
-                <div class="row">
+                <div class="row" id="specialized">
                     <div class="col-sm-9 col-md-9 col-lg-9">
                     '.$img.'
                     </div>
                 </div>
-				<div class="row">
+				<div class="row" id="clients">
 					<div class="col-md-6">
 					   <div class="alert alert-warning">
 							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
