@@ -337,10 +337,10 @@ if($page == "image_upload") {
             <div class="container-fluid">
 				<div class="row">
 					 <ul class="nav nav-pills">
-					  <li class="active"><a href="#">Home</a></li>
-					  <li><a href="#">Menu 1</a></li>
-					  <li><a href="#">Menu 2</a></li>
-					  <li><a href="#">Menu 3</a></li>
+					  <li class="active"><a href="#">Product description</a></li>
+					  <li><a href="#">Youtube</a></li>
+					  <li><a href="#">Specialized Reviews</a></li>
+					  <li><a href="#">Clients Reviews</a></li>
 					</ul>
 				</div>
                 <div class="row">
@@ -358,6 +358,25 @@ if($page == "image_upload") {
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
                 </div>
+				<div class="row">
+					<div class="col-md-6">
+					   <div class="alert alert-warning">
+							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+					   </div>
+					   <div class="alert alert-warning">
+							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+					   </div>
+					   <div class="alert alert-warning">
+							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+					   </div>
+					</div>
+				</div>
             </div>
         </body>
         </html>';
