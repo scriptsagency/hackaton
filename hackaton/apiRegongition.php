@@ -330,6 +330,7 @@ if($page == "image_upload") {
 //	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
+    echo '1';
     $htmlPage = '<!DOCTYPE html>
         <html lang="en">
         <head>
