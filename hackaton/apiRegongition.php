@@ -395,13 +395,12 @@ if($page == "image_upload") {
 						<h3>Product video reviews</h3>
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
-<<<<<<< HEAD
                 </div>';
 				
 				$html_reviews = '';
 				if(isset($array_reviews) && count($array_reviews) > 0){
 				
-					$html_reviews . ='<div class="row">
+					$html_reviews .='<div class="row">
 										<div class="col-md-6">';
 						foreach($array_reviews as $review){
 						$html_reviews .= '<div class="alert alert-warning">
@@ -412,14 +411,13 @@ if($page == "image_upload") {
 						
 						
 						}
-						$html_reviews . ='	</div>
+						$html_reviews .='	</div>
 										</div>';
 				
 				}
 
 				
 			$text_2 = '</div>
-=======
                 </div>
                 <div class="row" id="specialized">
                     <div class="col-sm-9 col-md-9 col-lg-9">
@@ -446,7 +444,6 @@ if($page == "image_upload") {
 					</div>
 				</div>
             </div>
->>>>>>> 28dfe436466368e16727aa7097f380f62ce7437b
         </body>
         </html>';
     echo $htmlPage.$html_reviews.$text_2;
