@@ -279,7 +279,7 @@ if($page == "image_upload") {
     if (!$productId)
         $productId = "104179";
 
-    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
+    header("LOCATION: apiRegongition.php?req=json&productId=".$productId);
 
 } else if($page == 'find_product') {
     $search = $_POST['search'];
@@ -319,7 +319,7 @@ if($page == "image_upload") {
     $productRating = $api->findProductRating($productId);
     $productData = $api->getProductData($productId);
 
-	$youtubeVid = $api->getYoutubeResults($productData['name']);
+	$youtubeVid = $api->getYoutubeResults($productData['desc']);
     $img = '';
     if(isset($productData['image1']))
         $img = "<img class='img_display' src='".$productData['image1']."' alt='' />";
@@ -357,7 +357,7 @@ if($page == "image_upload") {
 				</div>
                 <div class="row">
                     <div class="col-sm-9 col-md-9 col-lg-9">
-                        <h3>'.$productData['name'].'</h3>
+                        <h3>'.$productData['desc'].'</h3>
                         <p>'.$productData['short_desc'].'</p>
                         '.$renderRatingScore.'
                         <hr/>
