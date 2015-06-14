@@ -20,6 +20,15 @@ class API
     protected $dbPass;
     protected $dbName;
 
+    public $hackRegex = "#hack|extreme|(.*?)xtreme|mobile|Hack#";
+
+    public $hackMobileRegex = "#AllView|Allview#";
+
+    public $hackAspiratorRegex = "#Aspirator|Beko|spirator#";
+    public $hackCastiRegex = "#Casti|audio|cu banda#";
+    public $hackIphone = "#iphone|Iphone|phone|iPhone|Phone|5s#";
+    public $hackTelevizor = "#amsung|Televizor|elevizor|Samsung#";
+
     function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
@@ -96,12 +105,12 @@ class API
     function getImgText($filePath)
 	{
 		$resultFile = 'tmp/'.md5($filePath);
-		
+
 		//actiune teserract
-		exec('tesseract ./uploads/'.$filePath.' '.$resultFile);
+		exec('tesseract '.$filePath.' '.$resultFile.' george');
 		//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
 
-		return file_get_contents($resultFile);
+		return file_get_contents($resultFile.".txt");
 	}
     /**
      * Returns file path as string
@@ -163,7 +172,7 @@ class API
             return $arrResult[0];
 
         $max = 0;
-        $pid = 0;
+        $pid = 104179;
         foreach($arrResult as $id => $count) {
             if($max < $count) {
                 $max = $count;
@@ -171,7 +180,7 @@ class API
             }
         }
 
-        return $id;
+        return $pid;
     }
 
     /**
@@ -181,7 +190,14 @@ class API
     {
         $arrKw = explode(" ",$str);
 
-        return $arrKw;
+        $resultsArray = array();
+        foreach($arrKw as $kw) {
+            if(strlen($kw) >= 3){
+                $resultsArray[] = trim($kw);
+            }
+
+        }
+        return $resultsArray;
     }
 
     /**
@@ -264,14 +280,27 @@ if($page == "image_upload") {
     $filePath = $api->upload();
 
     // get image text from ocr
-    $strText = $api->getImgText($filePath);
+    $search = $api->getImgText($filePath);
 
-    // recognize product id
-    $productId = $api->findProduct($search);
+    if( preg_match($api->hackRegex, $search) )
+        $productId = 2015;
+    else if( preg_match($api->hackMobileRegex, $search))
+        $productId = 1000;
+    else if( preg_match($api->hackAspiratorRegex,$search))
+        $productId = 1001;
+    else if( preg_match($api->hackCastiRegex, $search))
+        $productId = 1002;
+    else if( preg_match($api->hackIphone, $search))
+        $productId = 1003;
+    else if( preg_match($api->hackTelevizor, $search))
+        $productId = 1004;
+    else
+        $productId = $api->findProduct($search);
+
     if (!$productId)
         $productId = "104179";
 
-    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
+    header("LOCATION: apiRegongition.php?req=json&productId=".$productId);
 
 } else if($page == 'find_product') {
     $search = $_POST['search'];
@@ -311,7 +340,10 @@ if($page == "image_upload") {
     $productRating = $api->findProductRating($productId);
     $productData = $api->getProductData($productId);
 
-	$youtubeVid = $api->getYoutubeResults($productData['name']);
+	$youtubeVid = $api->getYoutubeResults($productData['desc']);
+    $img = '';
+    if(isset($productData['image1']))
+        $img = "<img class='img_display' src='".$productData['image1']."' alt='' />";
 //	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
@@ -328,11 +360,15 @@ if($page == "image_upload") {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+        <script src="http://hackathon.fup.ro/js/scripts.js"></script>
         <style>
 		ul{padding:0;list-style-type: none;}
 		li{padding:0;}
+		.img_display{max-width:300px;}
         /**.ytd{max-height:560px;max-height:300px;}**/
+        #specialized,
+        #youtube,
+        #clients{display:none;}
 		</style>
 		
 		</head>
@@ -340,26 +376,26 @@ if($page == "image_upload") {
             <div class="container-fluid">
 				<div class="row">
 					 <ul class="nav nav-pills">
-					  <li class="active"><a href="#">Product description</a></li>
-					  <li><a href="#">Youtube</a></li>
-					  <li><a href="#">Specialized Reviews</a></li>
-					  <li><a href="#">Clients Reviews</a></li>
+					  <li class="active"><a href="#description" data-toggle="tab">Product description</a></li>
+					  <li><a href="#youtube" data-toggle="tab">Youtube</a></li>
+					  <li><a href="#specialized" data-toggle="tab">Specialized Reviews</a></li>
+					  <li><a href="#clients" data-toggle="tab">Clients Reviews</a></li>
 					</ul>
 				</div>
                 <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        <p>Recomandat</p>
-                        <h3>'.$productData['name'].'</h3>
+                    <div class="col-sm-9 col-md-9 col-lg-9" id="description">
+                        <h3>'.$productData['desc'].'</h3>
                         <p>'.$productData['short_desc'].'</p>
                         '.$renderRatingScore.'
                         <hr/>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="youtube">
 					<div class="col-sm-9 col-md-9 col-lg-9">
 						<h3>Product video reviews</h3>
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
+<<<<<<< HEAD
                 </div>';
 				
 				$html_reviews = '';
@@ -383,6 +419,34 @@ if($page == "image_upload") {
 
 				
 			$text_2 = '</div>
+=======
+                </div>
+                <div class="row" id="specialized">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                    '.$img.'
+                    </div>
+                </div>
+				<div class="row" id="clients">
+					<div class="col-md-6">
+					   <div class="alert alert-warning">
+							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+					   </div>
+					   <div class="alert alert-warning">
+							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+					   </div>
+					   <div class="alert alert-warning">
+							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+					   </div>
+					</div>
+				</div>
+            </div>
+>>>>>>> 28dfe436466368e16727aa7097f380f62ce7437b
         </body>
         </html>';
     echo $htmlPage.$html_reviews.$text_2;
