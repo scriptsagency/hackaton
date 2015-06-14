@@ -315,6 +315,9 @@ if($page == "image_upload") {
 //	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
+	
+	$array_reviews = $api->getReviews($productId);
+	
     $htmlPage = '<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -357,28 +360,30 @@ if($page == "image_upload") {
 						<h3>Product video reviews</h3>
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
-                </div>
-				<div class="row">
-					<div class="col-md-6">
-					   <div class="alert alert-warning">
-							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
-						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
-					   </div>
-					   <div class="alert alert-warning">
-							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
-						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
-					   </div>
-					   <div class="alert alert-warning">
-							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
-						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
-					   </div>
-					</div>
-				</div>
-            </div>
+                </div>';
+				
+				$html_reviews = '';
+				if(isset($array_reviews) && count($array_reviews) > 0){
+				
+					$html_reviews . ='<div class="row">
+										<div class="col-md-6">';
+						foreach($array_reviews as $review){
+						$html_reviews .= '<div class="alert alert-warning">
+												" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
+											   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+										</div>';
+						
+						
+						}
+						$html_reviews . ='	</div>
+										</div>';
+				
+				}
+
+				
+			$text_2 = '</div>
         </body>
         </html>';
-    echo $htmlPage;
+    echo $htmlPage.$html_reviews.$text_2;
 }
