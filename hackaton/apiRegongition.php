@@ -101,6 +101,7 @@ class API
 		exec('tesseract ./uploads/'.$filePath.' '.$resultFile);
 		//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
 
+        sleep(2);
 		return file_get_contents($resultFile);
 	}
     /**
