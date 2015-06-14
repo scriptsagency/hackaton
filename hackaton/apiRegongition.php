@@ -199,7 +199,6 @@ class API
         $totalResults = array();
 
         $arrSearch = $this->prepareSearch($str);
-        var_dump($arrSearch);
 
         foreach($arrSearch as $kw) {
             $sql = $this->db->query("select p.id from products p where p.name like '%".$kw."%' limit 10");
@@ -273,16 +272,14 @@ if($page == "image_upload") {
 
     // get image text from ocr
     $search = $api->getImgText($filePath);
-    var_dump($search);
 
     // recognize product id
     $productId = $api->findProduct($search);
-    var_dump($productId);
 
     if (!$productId)
         $productId = "104179";
 
-    //header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
+    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
 
 } else if($page == 'find_product') {
     $search = $_POST['search'];
