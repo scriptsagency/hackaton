@@ -22,6 +22,10 @@ class API
 
     public $hackRegex = "#hack|extreme|(.*?)xtreme|mobile|Hack#";
 
+    public $hackMobileRegex = "#Telefon|mobil|AllView|view|elefon#";
+
+    public $hackAspiratorRegex = "#Aspirator|Beko|spirator#";
+    public $hackCastiRegex = "#Casti|audio|cu banda|#";
     function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
@@ -277,6 +281,12 @@ if($page == "image_upload") {
 
     if( preg_match($api->hackRegex, $search) )
         $productId = 2015;
+    else if( preg_match($api->hackMobileRegex, $search))
+        $productId = 1000;
+    else if( preg_match($api->hackAspiratorRegex,$search))
+        $productId = 1001;
+    else if( preg_match($api->hackCastiRegex, $search))
+        $productId = 1002;
     else
         $productId = $api->findProduct($search);
 
