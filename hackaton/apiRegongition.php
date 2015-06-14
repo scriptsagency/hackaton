@@ -312,6 +312,9 @@ if($page == "image_upload") {
     $productData = $api->getProductData($productId);
 
 	$youtubeVid = $api->getYoutubeResults($productData['name']);
+    $img = '';
+    if(isset($productData['image1']))
+        $img = "<img class='img_display' src='".$productData['image1']."' alt='' />";
 //	var_dump($youtubeVid);
 	
     $renderRatingScore = $api->renderStars($productId);
@@ -329,6 +332,7 @@ if($page == "image_upload") {
         <style>
 		ul{padding:0;list-style-type: none;}
 		li{padding:0;}
+		.img_display{max-width:300px;}
         /**.ytd{max-height:560px;max-height:300px;}**/
 		</style>
 		
@@ -356,6 +360,11 @@ if($page == "image_upload") {
 						<h3>Product video reviews</h3>
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                    '.$img.'
+                    </div>
                 </div>
 				<div class="row">
 					<div class="col-md-6">
