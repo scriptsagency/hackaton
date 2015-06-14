@@ -346,6 +346,9 @@ if($page == "image_upload") {
 		li{padding:0;}
 		.img_display{max-width:300px;}
         /**.ytd{max-height:560px;max-height:300px;}**/
+        #specialized,
+        #youtube,
+        #clients{display:none;}
 		</style>
 		
 		</head>
