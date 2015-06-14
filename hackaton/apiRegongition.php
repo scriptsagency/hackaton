@@ -183,8 +183,10 @@ class API
 
         $resultsArray = array();
         foreach($arrKw as $kw) {
-            if(strlen($kw) >= 3)
-                $resultsArray[] = $kw;
+            if(strlen($kw) >= 3){
+                $resultsArray[] = trim($kw);
+            }
+
         }
         return $resultsArray;
     }
