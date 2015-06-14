@@ -329,7 +329,6 @@ if($page == "image_upload") {
         <style>
 		ul{padding:0;list-style-type: none;}
 		li{padding:0;}
-		.embed-responsive-16by9{padding-bottom: 20px}
         /**.ytd{max-height:560px;max-height:300px;}**/
 		</style>
 		
