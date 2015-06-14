@@ -406,7 +406,7 @@ if($page == "image_upload") {
 						if(isset($array_reviews) && count($array_reviews) > 0){
 
 										foreach($array_reviews as $review){
-										echo '<div class="alert alert-warning">
+										$htmlPage .= '<div class="alert alert-warning">
 																"'.$review['text'].'"
 															   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
 														</div>';
