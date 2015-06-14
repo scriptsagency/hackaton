@@ -267,16 +267,19 @@ $api = new API;
 if($page == "image_upload") {
     // get file path
     $filePath = $api->upload();
+    var_dump($filePath);
 
     // get image text from ocr
     $search = $api->getImgText($filePath);
+
+    var_dump($search);
 
     // recognize product id
     $productId = $api->findProduct($search);
     if (!$productId)
         $productId = "104179";
 
-    header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
+    //header("LOCATION: apiRegongition.php?req=json&productId=" . $productId);
 
 } else if($page == 'find_product') {
     $search = $_POST['search'];
