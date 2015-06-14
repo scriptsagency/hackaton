@@ -20,7 +20,7 @@ class API
     protected $dbPass;
     protected $dbName;
 
-    protected $hackRegex = "#hack|extreme|(.*?)xtreme|mobile|Hack#";
+    public $hackRegex = "#hack|extreme|(.*?)xtreme|mobile|Hack#";
 
     function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
@@ -275,7 +275,7 @@ if($page == "image_upload") {
     // get image text from ocr
     $search = $api->getImgText($filePath);
 
-    if( preg_match($this->hackRegex, $search) )
+    if( preg_match($api->hackRegex, $search) )
         $productId = 2015;
     else
         $productId = $api->findProduct($search);
