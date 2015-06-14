@@ -96,13 +96,12 @@ class API
     function getImgText($filePath)
 	{
 		$resultFile = 'tmp/'.md5($filePath);
-		
+
 		//actiune teserract
-		exec('tesseract ./uploads/'.$filePath.' '.$resultFile);
+		exec('tesseract '.$filePath.' '.$resultFile);
 		//$chars = str_replace(array(" ", "\n", "\r"), "", file_get_contents($resultFileFull));
 
-        sleep(2);
-		return file_get_contents($resultFile);
+		return file_get_contents($resultFile.".txt");
 	}
     /**
      * Returns file path as string
