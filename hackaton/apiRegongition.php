@@ -22,7 +22,7 @@ class API
 
     public $hackRegex = "#hack|extreme|(.*?)xtreme|mobile|Hack#";
 
-    public $hackMobileRegex = "#AllView#";
+    public $hackMobileRegex = "#AllView|Allview#";
 
     public $hackAspiratorRegex = "#Aspirator|Beko|spirator#";
     public $hackCastiRegex = "#Casti|audio|cu banda#";
