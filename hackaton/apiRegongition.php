@@ -395,38 +395,27 @@ if($page == "image_upload") {
 						<h3>Product video reviews</h3>
 						'. $api->renderYoutube($youtubeVid) .'
 					</div>
-                </div>';
-				
-				$html_reviews = '';
-				if(isset($array_reviews) && count($array_reviews) > 0){
-				
-					$html_reviews .='<div class="row">
-										<div class="col-md-6">';
-						foreach($array_reviews as $review){
-						$html_reviews .= '<div class="alert alert-warning">
-												" '.$review['text'].'"
-											   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
-										</div>';
-						
-						
-						}
-						$html_reviews .='	</div>
-										</div>';
-				
-				}
-
-				
-			$text_2 = '</div>
                 </div>
-				
                 <div class="row" id="specialized">
                     <div class="col-sm-9 col-md-9 col-lg-9">
                     '.$img.'
                     </div>
                 </div>
 				<div class="row" id="clients">
-					<div class="col-md-6">
-					   <div class="alert alert-warning">
+					<div class="col-md-6">';
+						if(isset($array_reviews) && count($array_reviews) > 0){
+
+										foreach($array_reviews as $review){
+										echo '<div class="alert alert-warning">
+																"'.$review['text'].'"
+															   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
+														</div>';
+										
+										
+										}
+				
+						}
+				$htmlPage .= '<div class="alert alert-warning">
 							" &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. &nbsp; "
 						   <h5 class="get-right"><strong> - Umaya Deminox </strong></h5>
@@ -446,5 +435,5 @@ if($page == "image_upload") {
             </div>
         </body>
         </html>';
-    echo $htmlPage.$html_reviews.$text_2;
+    echo $htmlPage;
 }
