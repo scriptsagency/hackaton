@@ -26,6 +26,7 @@ class API
 
     public $hackAspiratorRegex = "#Aspirator|Beko|spirator#";
     public $hackCastiRegex = "#Casti|audio|cu banda|#";
+    
     function __construct($host = "localhost", $dbUser = "developer", $dbPass = "kAR3fCe4", $dbName = "hackathon")
     {
         $this->dbHost = $host;
