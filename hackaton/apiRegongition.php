@@ -292,7 +292,7 @@ if($page == "image_upload") {
         $productId = 1002;
     else if( preg_match($api->hackIphone, $search))
         $productId = 1003;
-    else if( preg_match($api->$hackTelevizor, $search))
+    else if( preg_match($api->hackTelevizor, $search))
         $productId = 1004;
     else
         $productId = $api->findProduct($search);
