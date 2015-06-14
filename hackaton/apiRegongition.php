@@ -269,7 +269,7 @@ if($page == "image_upload") {
     $filePath = $api->upload();
 
     // get image text from ocr
-    $strText = $api->getImgText($filePath);
+    $search = $api->getImgText($filePath);
 
     // recognize product id
     $productId = $api->findProduct($search);
